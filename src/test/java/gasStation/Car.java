@@ -6,6 +6,10 @@ public abstract class Car {
 
     protected abstract int getGasMileage();
 
+    public String report() {
+        return this.getClass().getName()+": "+fuelAmount+"L";
+    }
+
     public int getFuelAmount() {
         return fuelAmount;
     }
