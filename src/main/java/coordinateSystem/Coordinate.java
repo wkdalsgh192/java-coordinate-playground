@@ -15,6 +15,10 @@ public class Coordinate {
         if (x > INPUT_CONSTRAINT || y > INPUT_CONSTRAINT) throw new IllegalArgumentException("입력값은 24를 초과할 수 없습니다.");
     }
 
+    public int getX() { return x; }
+
+    public int getY() { return y; }
+
     @Override
     public String toString() {
         return "(" + x + "," + y + ")";

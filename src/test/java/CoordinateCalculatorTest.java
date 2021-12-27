@@ -1,8 +1,11 @@
 import coordinateSystem.CoordinateCalculator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import static org.assertj.core.api.Assertions.offset;
 
 public class CoordinateCalculatorTest {
     @ParameterizedTest
@@ -19,5 +22,13 @@ public class CoordinateCalculatorTest {
     void insertCoordinate_GivenCoordinateOver24_Throw_IllegalArgumentException(String input) {
         Assertions.assertThatThrownBy(() -> new CoordinateCalculator(input)).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("입력값은 24를 초과할 수 없습니다.");
 
+    }
+
+    @Test
+    @DisplayName("직선 좌표의 경우, 두 점 사이 거리를 계산한다.")
+    void calcCoordinate_GivenTwoCoordinates_Expect_DistanceBetweenThem() {
+        String input = "(10,10)-(14,15)";
+        CoordinateCalculator calculator = new CoordinateCalculator(input);
+        Assertions.assertThat(calculator.getLineLength()).isEqualTo(6.403, offset(0.00095));
     }
 }

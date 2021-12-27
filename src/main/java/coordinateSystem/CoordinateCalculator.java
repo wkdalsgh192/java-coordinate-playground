@@ -28,4 +28,10 @@ public class CoordinateCalculator {
         for (Coordinate coordinate : coordinates) sb.append(coordinate+"-");
         return sb.substring(0, sb.length()-1);
     }
+
+    public double getLineLength() {
+        Coordinate A = coordinates.get(0);
+        Coordinate B = coordinates.get(1);
+        return Math.sqrt(Math.pow(A.getX() - B.getX(), 2) + Math.pow(A.getY() - B.getY(), 2));
+    }
 }
