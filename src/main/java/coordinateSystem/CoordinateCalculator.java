@@ -10,16 +10,19 @@ public class CoordinateCalculator {
     public CoordinateCalculator(String input) {
         coordinates = new ArrayList<>();
         for (int i = 0; i < input.length(); i++) {
-            makeCoordinate(input, i, input.charAt(i) == '(');
+            makeCoordinate(input, i);
         }
     }
 
-    // TODO [장민호] 파라미터 갯수를 줄이려면 어떻게 해야할까?
-    private void makeCoordinate(String input, int start, boolean matched) {
-        if (!matched) return;
-        int end = start;
+    private void makeCoordinate(String input, int startIdx) {
+        if (input.charAt(startIdx) != '(') return;
+        coordinates.add(Coordinate.from(extract(input, startIdx)));
+    }
+
+    private String[] extract(String input, int idx) {
+        int end = idx;
         while (input.charAt(end) !=')') ++end;
-        coordinates.add(new Coordinate(input.substring(start + 1, end)));
+        return input.substring(idx+1, end).split(",");
     }
 
     @Override
