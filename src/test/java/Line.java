@@ -1,0 +1,2 @@
+class Line extends Shape {
+}
