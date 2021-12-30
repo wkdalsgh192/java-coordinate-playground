@@ -86,6 +86,7 @@ ex) git checkout -b apply-feedback
 - Point 객체를 이용해 x,y 좌표를 관리한다.
 
 ### 테스트 사항
+> - 좌표 하나가 주어졌을 때 Point 객체로 변환한다.
 > - 각 좌표의 값 범위는 0 미만이거나 24를 초과할 수 없다. [new Point(25,25) -> throws IllegalArgumentException]
 > - 좌표를 입력했을 때, 주어진 좌표의 갯수를 확인하고, 분류한다. [(10,10)-(10,12) -> return LINE]
 > - 직선 좌표인 경우, 두 점 사이의 거리를 계산한다. [(10,10)(14,15) -> return 6.403124]
