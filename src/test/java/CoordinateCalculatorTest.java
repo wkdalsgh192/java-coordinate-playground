@@ -54,7 +54,7 @@ public class CoordinateCalculatorTest {
     @Test
     @DisplayName("직선 좌표인 경우, 두 점 사이의 거리를 계산한다.")
     void calc_WhenTwoPointsGiven_Expect_LengthOfLine() {
-        String input = "(10,10)-(10,12)";
+        String input = "(10,10)-(14,15)";
         Shape shape = Coordinate.getShapeFrom(util.split(input));
         Assertions.assertThat(shape.calc()).isEqualTo(6.403124, Offset.offset(0.0001));
     }

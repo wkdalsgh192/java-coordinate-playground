@@ -18,6 +18,14 @@ public class Point {
             throw new IllegalArgumentException("각 좌표의 값 범위는 24를 초과하지 않는 양수여야 합니다.");
     }
 
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
