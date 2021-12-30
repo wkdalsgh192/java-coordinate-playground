@@ -7,10 +7,10 @@ public class Point {
     private int x;
     private int y;
 
-    public Point(String x, String y) {
-        this.x = Integer.parseInt(x);
-        this.y = Integer.parseInt(y);
-        validate(this.x, this.y);
+    public Point(String X, String Y) {
+        this.x = Integer.parseInt(X);
+        this.y = Integer.parseInt(Y);
+        validate(x, y);
     }
 
     private void validate(int x, int y) {
@@ -18,13 +18,9 @@ public class Point {
             throw new IllegalArgumentException("각 좌표의 값 범위는 24를 초과하지 않는 양수여야 합니다.");
     }
 
-    public int getX() {
-        return x;
-    }
+    public int getX() { return x; }
 
-    public int getY() {
-        return y;
-    }
+    public int getY() { return y; }
 
     @Override
     public boolean equals(Object o) {
