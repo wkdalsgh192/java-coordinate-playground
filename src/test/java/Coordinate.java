@@ -6,8 +6,14 @@ public class Coordinate {
 
     public static Shape getShapeFrom(String[] input) {
         List<Point> points = extractPoints(input);
-        if (points.size() == 2) return new Line(points);
-        return new Square(points);
+        switch (points.size()) {
+            case 3:
+                return new Triangle(points);
+            case 4:
+                return new Square(points);
+            default:
+                return new Line(points);
+        }
     }
 
     private static List<Point> extractPoints(String[] input) {

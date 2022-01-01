@@ -31,7 +31,7 @@ public class CoordinateCalculatorTest {
 
     @ParameterizedTest
     @DisplayName("좌표를 입력했을 때, 주어진 좌표의 갯수를 확인하고, Shape 클래스로 캐스팅한다.")
-    @ValueSource(strings = {"(10,10)-(10,12)", "(10,10)-(22,10)-(22,18)-(10,18)"})
+    @ValueSource(strings = {"(10,10)-(10,12)","(10,10)-(22,10)-(22,18)", "(10,10)-(22,10)-(22,18)-(10,18)"})
     void insertCoordinate_Expect_CountPoints_And_CheckShape(String input) {
         Assertions.assertThat(Coordinate.getShapeFrom(CoordinateUtil.split(input))).isInstanceOf(Shape.class);
     }
@@ -40,6 +40,12 @@ public class CoordinateCalculatorTest {
     @DisplayName("2개의 좌표가 주어지면, 선으로 분류한다.")
     void insertCoordinate_WhenTwoPointsGiven_Expect_CreateLine() {
         Assertions.assertThat(Coordinate.getShapeFrom(CoordinateUtil.split("(10,10)-(10,12)"))).isInstanceOf(Line.class);
+    }
+
+    @Test
+    @DisplayName("3개의 좌표가 주어지면, 삼각형으로 분류한다.")
+    void insertCoordinate_WhenThreePointsGiven_Expect_CreateTriangle() {
+        Assertions.assertThat(Coordinate.getShapeFrom(CoordinateUtil.split("(10,10)-(22,10)-(22,18)"))).isInstanceOf(Triangle.class);
     }
 
     @Test
