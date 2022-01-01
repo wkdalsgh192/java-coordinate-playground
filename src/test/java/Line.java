@@ -1,16 +1,11 @@
-import java.util.Arrays;
-import java.util.Comparator;
+import java.util.List;
 
-class Line extends Shape {
+class Line implements Shape {
 
-    Line() {}
+    List<Point> points;
 
-    Line(String[] points) { super(points); }
-
-    static Line of(Point p1, Point p2) {
-        Line line = new Line();
-        line.points = Arrays.asList(p1,p2);
-        return line;
+    public Line(List<Point> points) {
+        this.points = points;
     }
 
     double multiply(Line o) {
@@ -18,13 +13,11 @@ class Line extends Shape {
     }
 
     int compare(Line o) {
-        if (this.calc() > o.calc()) return 1;
-        if (this.calc() < o.calc()) return -1;
-        return 0;
+        return Double.compare(this.calc(), o.calc());
     }
 
     @Override
-    double calc() {
+    public double calc() {
         Point p1 = points.get(0);
         Point p2 = points.get(1);
         return Math.sqrt(Math.pow(p1.getX()-p2.getX(), 2)+Math.pow(p1.getY()-p2.getY(),2));
