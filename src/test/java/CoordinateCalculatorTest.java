@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.awt.*;
+
 public class CoordinateCalculatorTest {
 
     @Test
@@ -55,6 +57,16 @@ public class CoordinateCalculatorTest {
         String input = "(10,10)-(14,15)";
         Shape shape = Coordinate.getShapeFrom(CoordinateUtil.split(input));
         Assertions.assertThat(shape.calc()).isEqualTo(6.403124, Offset.offset(0.0001));
+    }
+
+    @Test
+    @DisplayName("사각형 좌표인 경우, 네 점이 이루는 사각형이 직사각형이여야 한다.")
+    void validate_WhenSquareIsNotRectangle_Throw_IllegalStateSException() {
+        Assertions.assertThatThrownBy(() -> {
+            String input = "(10,11)-(22,10)-(22,18)-(10,18)";
+            Square square = (Square) Coordinate.getShapeFrom(CoordinateUtil.split(input));
+            square.calc();
+        }).isInstanceOf(IllegalStateException.class).hasMessageContaining("직사각형이 아닙니다.");
     }
 
     @Test
