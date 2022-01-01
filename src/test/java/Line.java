@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Comparator;
 
 class Line extends Shape {
 
@@ -10,6 +11,16 @@ class Line extends Shape {
         Line line = new Line();
         line.points = Arrays.asList(p1,p2);
         return line;
+    }
+
+    double multiply(Line o) {
+        return this.calc()*o.calc();
+    }
+
+    int compare(Line o) {
+        if (this.calc() > o.calc()) return 1;
+        if (this.calc() < o.calc()) return -1;
+        return 0;
     }
 
     @Override

@@ -18,12 +18,12 @@ class Square extends Shape {
         Line h1 = Line.of(points.get(0), points.get(2));
         Line h2 = Line.of(points.get(1), points.get(3));
 
-        if (w1.calc() != w2.calc() || h1.calc() != h2.calc())
+        if (w1.compare(w2) != 0 || h1.compare(h2) != 0)
             throw new IllegalStateException("직사각형이 아닙니다.");
     }
 
     @Override
     double calc() {
-        return w.calc()*h.calc();
+        return w.multiply(h);
     }
 }
