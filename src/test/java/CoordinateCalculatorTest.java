@@ -79,4 +79,12 @@ public class CoordinateCalculatorTest {
         Shape shape = Coordinate.getShapeFrom(CoordinateUtil.split(input));
         Assertions.assertThat(shape.calc()).isEqualTo(96, Offset.strictOffset(0.1));
     }
+
+    @Test
+    @DisplayName("삼각형 좌표인 경우, 삼각형의 면적을 계산한다.")
+    void calc_WhenThreePointsGiven_Expect_AreaOfTriangle() {
+        String input = "(10,10)-(14,15)-(20,8)";
+        Shape shape = Coordinate.getShapeFrom(CoordinateUtil.split(input));
+        Assertions.assertThat(shape.calc()).isEqualTo(29.0, Offset.offset(0.001));
+    }
 }
