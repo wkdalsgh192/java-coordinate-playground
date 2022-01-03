@@ -39,7 +39,7 @@ public class CoordinateCalculatorTest {
     @Test
     @DisplayName("2개의 좌표가 주어지면, 선으로 분류한다.")
     void insertCoordinate_WhenTwoPointsGiven_Expect_CreateLine() {
-        Assertions.assertThat(Coordinate.getShapeFrom(CoordinateUtil.split("(10,10)-(10,12)"))).isInstanceOf(Line.class);
+        Assertions.assertThat(Coordinate.getShapeFrom(CoordinateUtil.split("(10,10)-(10,12)"))).isInstanceOf(Segment.class);
     }
 
     @Test

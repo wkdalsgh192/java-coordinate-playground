@@ -12,7 +12,7 @@ public class Coordinate {
             case 4:
                 return new Square(points);
             default:
-                return new Line(points);
+                return new Segment(points);
         }
     }
 
