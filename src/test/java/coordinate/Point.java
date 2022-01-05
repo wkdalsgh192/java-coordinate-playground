@@ -17,4 +17,8 @@ class Point {
         if (v < MINIMUM_VALUE_BOUND || y > MAXIMUM_VALUE_BOUND) throw new IllegalArgumentException();
         return v;
     }
+
+    public int getX() { return x; }
+
+    public int getY() { return y; }
 }

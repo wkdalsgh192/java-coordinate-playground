@@ -1,11 +1,12 @@
 package coordinate;
 
 import org.assertj.core.api.Assertions;
-import org.assertj.core.data.Offset;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+
+import static org.assertj.core.api.Assertions.offset;
 
 public class CoordinateCalculatorTest {
 
@@ -28,21 +29,6 @@ public class CoordinateCalculatorTest {
         Point a = new Point(10,10);
         Point b = new Point(14,15);
         Line line = new Line(a,b);
-        Assertions.assertThat(line.calc()).isCloseTo(6.403, Offset.offset(0.001));
-    }
-
-    private class Line {
-
-        Point a;
-        Point b;
-
-        public Line(Point a, Point b) {
-            this.a = a;
-            this.b = b;
-        }
-
-        public long calc() {
-            return 0;
-        }
+        Assertions.assertThat(line.calc()).isEqualTo(6.4031242374328485);
     }
 }
