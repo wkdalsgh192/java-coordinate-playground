@@ -14,7 +14,7 @@ class Point {
 
     // NOTE: 검증 로직은 INPUT VIEW에서?
     private int validateBounds(int v) {
-        if (v < MINIMUM_VALUE_BOUND || y > MAXIMUM_VALUE_BOUND) throw new IllegalArgumentException();
+        if (v < MINIMUM_VALUE_BOUND || v > MAXIMUM_VALUE_BOUND) throw new IllegalArgumentException();
         return v;
     }
 

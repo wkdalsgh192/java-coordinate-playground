@@ -1,13 +1,13 @@
 package coordinate;
 
+import java.util.List;
+
 class Line {
 
-    Point a;
-    Point b;
+    List<Point> points;
 
-    public Line(Point a, Point b) {
-        this.a = a;
-        this.b = b;
+    public Line(List<Point> points) {
+        this.points = points;
     }
 
     public double calc() {
@@ -15,6 +15,8 @@ class Line {
     }
 
     private double applyFormula() {
+        Point a = points.get(0);
+        Point b = points.get(1);
         return Math.sqrt(Math.pow(a.getX() - b.getX(), 2) + Math.pow(a.getY() - b.getY(), 2));
     }
 }
