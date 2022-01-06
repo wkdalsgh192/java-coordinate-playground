@@ -1,6 +1,7 @@
 package coordinate;
 
 import org.assertj.core.api.Assertions;
+import org.assertj.core.data.Offset;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -9,8 +10,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.*;
-import java.util.stream.IntStream;
-import java.util.stream.LongStream;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.offset;
 
@@ -30,7 +30,7 @@ public class CoordinateCalculatorTest {
     }
 
     @Nested
-    @DisplayName("")
+    @DisplayName("직선 테스트")
     class LineTest {
 
         List<Point> points;
@@ -49,7 +49,7 @@ public class CoordinateCalculatorTest {
     }
 
     @Nested
-    @DisplayName("")
+    @DisplayName("직사각형 테스트")
     class RectangleTest {
 
         List<Point> points;
@@ -65,25 +65,54 @@ public class CoordinateCalculatorTest {
             Rectangle r = new Rectangle(points);
             Assertions.assertThat(r).isInstanceOf(Rectangle.class);
         }
+
+        @Test
+        @DisplayName("직사각형 좌표에인 경우, 사각형의 면적을 계산한다.")
+        void calc_GivenFourCoordinates_WhenRectangle_Expect_getArea() {
+            Rectangle r = new Rectangle(points);
+            Assertions.assertThat(r.calc()).isEqualTo(96, Offset.offset(0.0001));
+        }
     }
 
-    private class Rectangle {
+    @Nested
+    @DisplayName("삼각형 테스트")
+    class TriangleTest {
 
         List<Point> points;
 
-        public Rectangle(List<Point> points) {
-            validate(points);
-            this.points = points;
+        @BeforeEach
+        void init() {
+            points = Arrays.asList(new Point(10,10),new Point(14,15),new Point(20,8));
         }
 
-        private void validate(List<Point> points) {
-            Set<Integer> valueSetX = new HashSet<>();
-            Set<Integer> valueSetY = new HashSet<>();
-            points.forEach(p -> {
-                valueSetX.add(p.getX());
-                valueSetY.add(p.getY());
-            });
-            if (valueSetX.size() != 2 && valueSetY.size() != 2) throw new IllegalArgumentException("직사각형이 아닙니다.");
+        @Test
+        @DisplayName("삼각형 좌표인 경우, 삼각형의 면적을 계산한다")
+        void calc_GivenThreeCoordinates_WhenTriangle_Expect_GetArea() {
+            Triangle t = new Triangle(points);
+            Assertions.assertThat(t.calc()).isEqualTo(29, Offset.offset(0.1));
+        }
+
+        private class Triangle {
+
+            List<Point> points;
+
+            public Triangle(List<Point> points) {
+                this.points = points;
+            }
+
+            public double calc() {
+                return applyFormula();
+            }
+
+            private double applyFormula() {
+                Line a = new Line(List.of(points.get(0), points.get(1)));
+                Line b = new Line(List.of(points.get(0), points.get(2)));
+                Line c = new Line(List.of(points.get(1), points.get(2)));
+
+                double s = (a.calc()+b.calc()+c.calc())/2;
+                return Math.sqrt(s*(s-a.calc())*(s-b.calc())*(s-c.calc()));
+            }
         }
     }
+
 }
