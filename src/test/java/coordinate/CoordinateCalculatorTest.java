@@ -92,27 +92,6 @@ public class CoordinateCalculatorTest {
             Assertions.assertThat(t.calc()).isEqualTo(29, Offset.offset(0.1));
         }
 
-        private class Triangle {
-
-            List<Point> points;
-
-            public Triangle(List<Point> points) {
-                this.points = points;
-            }
-
-            public double calc() {
-                return applyFormula();
-            }
-
-            private double applyFormula() {
-                Line a = new Line(List.of(points.get(0), points.get(1)));
-                Line b = new Line(List.of(points.get(0), points.get(2)));
-                Line c = new Line(List.of(points.get(1), points.get(2)));
-
-                double s = (a.calc()+b.calc()+c.calc())/2;
-                return Math.sqrt(s*(s-a.calc())*(s-b.calc())*(s-c.calc()));
-            }
-        }
     }
 
 }
