@@ -1,6 +1,6 @@
 package coordinate.model;
 
-class Point {
+public class Point {
 
     private final int MINIMUM_VALUE_BOUND = 0;
     private final int MAXIMUM_VALUE_BOUND = 24;

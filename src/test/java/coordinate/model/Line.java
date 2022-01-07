@@ -2,7 +2,7 @@ package coordinate.model;
 
 import java.util.List;
 
-class Line extends AbstractShape {
+public class Line extends AbstractShape {
 
     public Line(List<Point> points) {
         super(points);
