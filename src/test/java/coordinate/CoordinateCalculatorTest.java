@@ -7,10 +7,14 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.*;
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.offset;
 
@@ -94,4 +98,28 @@ public class CoordinateCalculatorTest {
 
     }
 
+    @ParameterizedTest
+    @DisplayName("좌표가 주어졌을 때, 좌표의 갯수에 따라 특정 도형 / 선분을 호출한다")
+    @MethodSource("providePointArguments")
+    void create_GivenCertainCoordinates_WhenValid_Expect_ToCorrectObject(List<Point> points, Shape shape) {
+        Assertions.assertThat(ShapeFactory.create(points)).isInstanceOf(shape.getClass());
+    }
+
+    private static Stream<Arguments> providePointArguments() {
+        return Stream.of(
+                Arguments.of(Arrays.asList(new Point(10,10),new Point(14,15)), new Line()),
+                Arguments.of(Arrays.asList(new Point(10,10),new Point(14,15),new Point(20,8)), new Triangle()),
+                Arguments.of(Arrays.asList(new Point(10,10),new Point(22,10),new Point(22,18),new Point(10,18)), new Rectangle())
+        );
+    }
+
+    private static class ShapeFactory {
+
+        private static Shape create(List<Point> points) {
+            if (points.size() == 2) return new Line(points);
+            if (points.size() == 3) return new Triangle(points);
+            if (points.size() == 4) return new Rectangle(points);
+            throw new IllegalStateException("해당 좌표 갯수에 알맞는 도형이 없습니다.");
+        }
+    }
 }

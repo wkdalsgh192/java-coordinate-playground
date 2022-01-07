@@ -9,6 +9,8 @@ class Triangle extends AbstractShape {
         super(points);
     }
 
+    public Triangle() {}
+
     @Override
     public void validate(List<Point> points) {
         // TODO 장민호 모두 다른 점일때만 가능하다

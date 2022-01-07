@@ -11,6 +11,8 @@ class Rectangle extends AbstractShape {
         super(points);
     }
 
+    public Rectangle() {}
+
     public void validate(List<Point> points) {
         Set<Integer> valueSetX = new HashSet<>();
         Set<Integer> valueSetY = new HashSet<>();
