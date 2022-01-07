@@ -1,4 +1,4 @@
-package coordinate;
+package coordinate.model;
 
 class Point {
 

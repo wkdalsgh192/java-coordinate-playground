@@ -1,4 +1,4 @@
-package coordinate;
+package coordinate.model;
 
 import org.assertj.core.api.Assertions;
 import org.assertj.core.data.Offset;
@@ -10,7 +10,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.*;
 import java.util.List;
