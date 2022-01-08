@@ -1,6 +1,8 @@
 package coordinate.model;
 
-class Point {
+import java.util.Objects;
+
+public class Point {
 
     private final int MINIMUM_VALUE_BOUND = 0;
     private final int MAXIMUM_VALUE_BOUND = 24;
@@ -21,4 +23,17 @@ class Point {
     public int getX() { return x; }
 
     public int getY() { return y; }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Point point = (Point) o;
+        return x == point.x && y == point.y;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
+    }
 }

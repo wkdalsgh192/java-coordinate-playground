@@ -11,11 +11,9 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.*;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
-
-import static org.assertj.core.api.Assertions.offset;
 
 public class CoordinateCalculatorTest {
 
@@ -112,13 +110,4 @@ public class CoordinateCalculatorTest {
         );
     }
 
-    private static class ShapeFactory {
-
-        private static Shape create(List<Point> points) {
-            if (points.size() == 2) return new Line(points);
-            if (points.size() == 3) return new Triangle(points);
-            if (points.size() == 4) return new Rectangle(points);
-            throw new IllegalStateException("해당 좌표 갯수에 알맞는 도형이 없습니다.");
-        }
-    }
 }
