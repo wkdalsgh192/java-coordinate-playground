@@ -4,7 +4,7 @@ import java.util.List;
 
 public class ShapeFactory {
 
-    private static Shape create(List<Point> points) {
+    public static Shape create(List<Point> points) {
         if (points.size() == 2) return new Line(points);
         if (points.size() == 3) return new Triangle(points);
         if (points.size() == 4) return new Rectangle(points);

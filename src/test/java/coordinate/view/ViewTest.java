@@ -1,6 +1,9 @@
 package coordinate.view;
 
+import coordinate.model.Line;
 import coordinate.model.Point;
+import coordinate.model.Shape;
+import coordinate.model.ShapeFactory;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -33,6 +36,12 @@ public class ViewTest {
         Assertions.assertThat(points.contains(new Point(10,12))).isTrue();
     }
 
+    @Test
+    @DisplayName("사용자가 정상 좌표값을 입력한 경우, 형태 검증 후 그에 알맞는 도형을 반환한다")
+    void whenUserPutsValidCoordinates_Expect_Validagte_And_CreateShape() {
+        Assertions.assertThat(InputView.insert("(10,10)-(10,12)")).isInstanceOf(Line.class);
+    }
+
     private static class InputView {
 
         private static final String INITIAL_NOTICE_TEXT = "좌표를 입력하세요.\n";
@@ -42,11 +51,11 @@ public class ViewTest {
             return new Scanner(System.in).nextLine();
         }
 
-/*        public static Shape insert(String s) {
+        public static Shape insert(String s) {
             validate(s);
             Points points = parse(s);
-            return ShapeFactory.create(points);
-        }*/
+            return ShapeFactory.create(points.get());
+        }
 
         public static Points parse(String s) {
             String[] coordinates = s.replaceAll("[()]","").split("-");
@@ -59,7 +68,7 @@ public class ViewTest {
         }
 
         public static void validate(String s) {
-            Pattern pattern = Pattern.compile("(\\d\\d,\\d\\d)+[-]*");
+            Pattern pattern = Pattern.compile("(\\d,\\d)+[-]*");
             Matcher matcher = pattern.matcher(s);
             if (!matcher.matches()) throw new IllegalArgumentException();
         }
@@ -85,5 +94,7 @@ public class ViewTest {
         public void add(Point point) {
             pointList.add(point);
         }
+
+        public List<Point> get() { return pointList; }
     }
 }
