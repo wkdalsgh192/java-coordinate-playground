@@ -68,7 +68,8 @@ public class ViewTest {
         }
 
         public static void validate(String s) {
-            Pattern pattern = Pattern.compile("(\\d,\\d)+[-]*");
+            final String regex = "(\\([0-9]{1,2},[0-9]{1,2}\\))(-(\\([0-9]{1,2},[0-9]{1,2}\\))){0,3}";
+            Pattern pattern = Pattern.compile(regex);
             Matcher matcher = pattern.matcher(s);
             if (!matcher.matches()) throw new IllegalArgumentException();
         }
