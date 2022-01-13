@@ -38,6 +38,16 @@ public class ViewTest {
     }
 
     @Test
+    @DisplayName("사용자가 2개의 좌표를 입력한 경우, 선분을 반환한다.")
+    void whenUserPutsTwoCoordinates_Expect_CreateLine() {
+        Shape shape = InputView.insert("(10,12)-(15,20)");
+        Points points = Points.create();
+        points.add(new Point(10,12));
+        points.add(new Point(15,20));
+        Assertions.assertThat(shape).isEqualTo(ShapeFactory.create(points.get())).isInstanceOf(Line.class);
+    }
+
+    @Test
     @DisplayName("사용자가 3개의 좌표를 입력한 경우, 삼각형을 반환한다.")
     void whenUserPutsValidCoordinates_Expect_CreateTriangle() {
         Shape shape = InputView.insert("(10,10)-(10,12)-(8,5)");
