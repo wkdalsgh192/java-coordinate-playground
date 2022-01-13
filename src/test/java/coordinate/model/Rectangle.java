@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-class Rectangle extends AbstractShape {
+public class Rectangle extends AbstractShape {
 
     public Rectangle(List<Point> points) {
         super(points);

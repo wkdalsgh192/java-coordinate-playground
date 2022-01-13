@@ -5,8 +5,6 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -50,6 +48,18 @@ public class ViewTest {
         Assertions.assertThat(shape).isEqualTo(ShapeFactory.create(pointList.get())).isInstanceOf(Triangle.class);
     }
 
+    @Test
+    @DisplayName("사용자가 4개의 좌표를 입력한 경우, 사각형을 반환한다.")
+    void whenUserPutsFourCoordinates_Expect_CreateRectangle() {
+        Shape shape = InputView.insert("(10,10)-(10,12)-(15,10)-(15,12)");
+        Points points = Points.create();
+        points.add(new Point(10,10));
+        points.add(new Point(10,12));
+        points.add(new Point(15,10));
+        points.add(new Point(15,12));
+        Assertions.assertThat(shape).isEqualTo(ShapeFactory.create(points.get())).isInstanceOf(Rectangle.class);
+    }
+
     private static class InputView {
 
         private static final String INITIAL_NOTICE_TEXT = "좌표를 입력하세요.\n";
@@ -83,27 +93,4 @@ public class ViewTest {
         }
     }
 
-    private static class Points {
-
-        private static List<Point> pointList;
-
-        public static Points create() {
-            Points points = new Points();
-            points.pointList = new ArrayList<>();
-            return points;
-        }
-
-        boolean contains(Point other) {
-            for (Point point : pointList) {
-                if (point.equals(other)) return true;
-            }
-            return false;
-        }
-
-        public void add(Point point) {
-            pointList.add(point);
-        }
-
-        public List<Point> get() { return pointList; }
-    }
 }
