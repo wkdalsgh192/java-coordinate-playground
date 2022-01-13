@@ -1,9 +1,6 @@
 package coordinate.view;
 
-import coordinate.model.Line;
-import coordinate.model.Point;
-import coordinate.model.Shape;
-import coordinate.model.ShapeFactory;
+import coordinate.model.*;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -38,8 +35,19 @@ public class ViewTest {
 
     @Test
     @DisplayName("사용자가 정상 좌표값을 입력한 경우, 형태 검증 후 그에 알맞는 도형을 반환한다")
-    void whenUserPutsValidCoordinates_Expect_Validagte_And_CreateShape() {
+    void whenUserPutsValidCoordinates_Expect_Validate_And_CreateShape() {
         Assertions.assertThat(InputView.insert("(10,10)-(10,12)")).isInstanceOf(Line.class);
+    }
+
+    @Test
+    @DisplayName("사용자가 3개의 좌표를 입력한 경우, 삼각형을 반환한다.")
+    void whenUserPutsValidCoordinates_Expect_CreateTriangle() {
+        Shape shape = InputView.insert("(10,10)-(10,12)-(8,5)");
+        Points pointList = Points.create();
+        pointList.add(new Point(10,10));
+        pointList.add(new Point(10,12));
+        pointList.add(new Point(8,5));
+        Assertions.assertThat(shape).isEqualTo(ShapeFactory.create(pointList.get())).isInstanceOf(Triangle.class);
     }
 
     private static class InputView {

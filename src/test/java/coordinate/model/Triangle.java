@@ -2,7 +2,7 @@ package coordinate.model;
 
 import java.util.List;
 
-class Triangle extends AbstractShape {
+public class Triangle extends AbstractShape {
 
 
     public Triangle(List<Point> points) {

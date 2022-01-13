@@ -1,8 +1,10 @@
 package coordinate.model;
 
 import java.util.List;
+import java.util.Objects;
 
 public abstract class AbstractShape implements Shape {
+    static final String ERROR_FIGURE_NULL = "올바른 Point 값이 아닙니다.";
     List<Point> points;
 
     AbstractShape(List<Point> points) {
@@ -19,5 +21,16 @@ public abstract class AbstractShape implements Shape {
 
     public abstract double applyFormula();
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AbstractShape that = (AbstractShape) o;
+        return Objects.equals(points, that.points);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(points);
+    }
 }
